@@ -1,6 +1,6 @@
 User.destroy_all
 Game.destroy_all
-Attendee.destroy_all
+Attendance.destroy_all
 Event.destroy_all
 UserGame.destroy_all
 
@@ -35,7 +35,7 @@ end
         )
 
         (3..7).to_a.sample.times do
-            Attendee.create(
+            Attendance.create(
                 event_id: event.id,
                 user_id: User.all.sample.id
             )
