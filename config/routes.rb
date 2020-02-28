@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     # get '/users/:id/hosted_events', to: 'users#hosted'
     # get '/users/:id/attended_events', to: 'users#attended' 
     
-    resources :events, only: [:index, :show, :create]
+    resources :events, only: [:index, :show, :create, :update, :destroy]
     
     resources :games, only: [:index, :create]
 

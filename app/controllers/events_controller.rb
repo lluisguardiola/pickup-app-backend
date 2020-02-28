@@ -22,6 +22,16 @@ class EventsController < ApplicationController
 		end
 	end
 
+	def update
+		event = Event.find(params[:id])
+		if event.valid?
+			event.update(event_params)
+			render json: event, include: :game
+		else
+			render json: {error: 'Event could not be updated.'}
+		end
+	end
+
 	private
 
 	def event_params
