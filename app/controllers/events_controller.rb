@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 	def index
-		render json: Event.all, include: :game
+		events = Event.all.sort_by {|event| event.created_at}.reverse.first(12)
+		render json: events, include: :game
 	end
 
 	def show
