@@ -33,6 +33,16 @@ class EventsController < ApplicationController
 		end
 	end
 
+	def destroy
+		event = Event.find(params[:id])
+		if event.valid?
+			event.destroy
+			render json: event
+		else
+			render json: {error: 'Event could not be deleted.'}
+		end
+	end
+
 	private
 
 	def event_params
