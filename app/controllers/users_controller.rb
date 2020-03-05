@@ -29,4 +29,23 @@ class UsersController < ApplicationController
 			render json: {error: 'User does not have any hosted events.'}
 		end
 	end
+
+	def attend
+		user = User.find(params[:user_id])
+		event = Event.find(params[:event_id])
+
+		if user.valid? && event.valid?
+			attendance = user.attendances.find_by(event_id: event.id)
+			#create new attendance instance and display active record error instead of string in else block
+			if !attendance
+				user.attended_events << event
+				render json: {success: 'You were added to the attendance list.', user: user}
+			else
+				attendance.destroy
+				render json: {error: 'You were removed from the attendance list.', user: user}
+			end
+		else
+			render json: {error: 'No event found.'}
+		end
+	end
 end
